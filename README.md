@@ -109,8 +109,5 @@ The following table summarizes the end-to-end tests, all of which passed success
 | Tasks               | `✓ should allow CRUD operations for authenticated user` | Passed |
 | Tasks               | `✓ should fail for unauthenticated user`           | Passed |
 
-## Project Structure
-
-
 Thank you for the opportunity to submit this assessment. I look forward to your feedback.
 
