@@ -79,10 +79,6 @@ The API includes Swagger documentation for easy exploration and testing of endpo
 
 ## Running Tests
 
-The project is equipped with a full suite of tests to ensure code quality and correctness.
-
-**Note**: Please ensure the database container is running before executing the E2E tests.
-
 ### Unit Tests
 
 ```bash
