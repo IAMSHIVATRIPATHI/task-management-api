@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, UseGuards, ValidationPipe, ParseIntPipe, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Patch,
+  UseGuards,
+  ValidationPipe,
+  ParseIntPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TasksService } from './tasks.service';
-import { CreateTaskDto, TaskStatus, UpdateTaskStatusDto } from './dto/create-task.dto';
+import { CreateTaskDto, UpdateTaskStatusDto } from './dto/create-task.dto';
 import { User } from '../users/entities/user.entity';
 import { GetUser } from '../auth/get-user.decorator';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
