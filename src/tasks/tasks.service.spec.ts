@@ -60,6 +60,7 @@ describe('TasksService', () => {
 
       const result = await service.getTasks(mockUser);
       expect(result).toEqual(mockTasks);
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.find).toHaveBeenCalledWith({
         where: { user: { id: mockUser.id } },
       });
@@ -110,7 +111,9 @@ describe('TasksService', () => {
           status: TaskStatus.OPEN,
         }),
       );
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.create).toHaveBeenCalled();
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.save).toHaveBeenCalled();
     });
   });
@@ -119,6 +122,7 @@ describe('TasksService', () => {
     it('should delete a task', async () => {
       (repository.delete as jest.Mock).mockResolvedValue({ affected: 1 });
       await service.deleteTask(1, mockUser);
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(repository.delete).toHaveBeenCalledWith({
         id: 1,
         user: { id: mockUser.id },
