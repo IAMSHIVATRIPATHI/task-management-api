@@ -2,13 +2,18 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
+
+interface JwtPayload {
+  username: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private configService: ConfigService,
     private usersService: UsersService,
+    private configService: ConfigService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -17,13 +22,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
-    const user = await this.usersService.findOne(payload.username);
+  async validate(payload: JwtPayload): Promise<User> {
+    const { username } = payload;
+    const user = await this.usersService.findOne(username);
+
     if (!user) {
       throw new UnauthorizedException();
     }
-    // Return user object which will be available in request.user
+
+    // The user object will be attached to the request, so we don't want to include the password.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...result } = user;
-    return result;
+    return result as User;
   }
 }
